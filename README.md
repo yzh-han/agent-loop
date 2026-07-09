@@ -37,7 +37,7 @@ AGENT_MAX_TURNS=5
 API_KEY=not-needed
 ```
 
-### 2. 启动 vLLM
+### 2. 启动 vLLM (可以跳过, 已经配置好了见飞书)
 
 代码注释中使用的启动方式如下：
 
