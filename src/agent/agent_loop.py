@@ -176,9 +176,9 @@ def run_agent(
     msg: ChatCompletionMessage = response.choices[0].message
 
     # _log(response.to_json(indent=2))
-    _log(f"[thinking]{msg.reasoning}")
-    _log(f"[finish_reason] {(finish_reason := response.choices[0].finish_reason)}")
-    _log(f"[usage] \n{response.usage.to_json(indent=2)}")
+    _log(f"\n[thinking start]\n{msg.reasoning}\n[thinking end]\n")
+    _log(f"\n[finish_reason start]\n{(finish_reason := response.choices[0].finish_reason)}\n[finish_reason end]\n")
+    _log(f"\n[usage start] \n{response.usage.to_json(indent=2)} \n[usage end]\n")
 
     # ── Step 2: 判断结果类型 ──
     #   A: tool_calls 不为空 → 执行工具函数, 追加 tool message, 回到循环开头 ->
@@ -187,7 +187,7 @@ def run_agent(
 
     # 情况 A: 模型返回了工具调用
     if msg.tool_calls:
-      _log(f"-> [tool calling] {len(msg.tool_calls)} tools")
+      _log(f"\n[tool calling start] \n{len(msg.tool_calls)}: {msg.tool_calls} \n[tool calling end]\n")
 
       # Step A1: 把 tool_calls 转成 AssistantMessageParam, 追加到 msgs
       # (reasoning 仅打印, 不持久化; plan tool 负责显式记录推理步骤)
@@ -213,8 +213,8 @@ def run_agent(
           # 执行工具
           tool_result = execute_tool(tool_name, tool_args)
           _log(
-            f"--> 执行{tc.to_dict()}工具: '{tool_name}', 参数: {tool_args}, id={tc.id}\n"
-            f"--> 返回: {tool_result[:100]}..."
+            f"--> 执行\n{tc.to_dict()}工具: '{tool_name}', 参数: {tool_args}, id={tc.id}\n<--\n"
+            f"--> 返回: \n{tool_result[:100]}... \n<--"
           )
             
 
@@ -240,7 +240,9 @@ def run_agent(
         content=msg.content,  # 可能是 None, 但 finish_reason="stop" 表示这是最终文本
       )]
       preview = (msg.content or "")[:100]
-      _log(f"[final answer]\n{preview}...")
+      _log(f"[final answer start]\n{preview}...\n[final answer end]")
+      
+      print(f"\n{'='*60}\n  打印所有context:\n{'='*60}")
       show_token_mapping(msg_params, tools, add_generation_prompt=False)  # 显示 token mapping
       return msg.content or ""
 

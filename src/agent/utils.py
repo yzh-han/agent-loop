@@ -57,7 +57,7 @@ def show_token_mapping(
     """
     prompt_text = resp.json()["prompt"]
 
-    print("-- mapping " + "-"* 49)
+    print("-- DETOKENIZE  start " + "-"*49)
     # 把特殊 token 标记出来，方便观察 chat template 的结构
     # 替换不可见的特殊 token 为可见标记
     display_text = (
@@ -86,7 +86,7 @@ def show_token_mapping(
     #     .replace('<|"|>', '\n<|"|>')
     # )
     print(display_text)
-    print("-" * 60)
+    print("-- DETOKENIZE  end  " + "-"*49)
     
 if __name__ == "__main__":
     # 测试用的 messages
