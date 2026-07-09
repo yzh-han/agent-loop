@@ -41,6 +41,10 @@ class Config:
     VLLM_DETOKENIZE_URL: str = field(
         default_factory=lambda: _env("VLLM_DETOKENIZE_URL", "http://localhost:8000/detokenize")
     )
+    
+    API_KEY: str = field(
+        default_factory=lambda: _env("API_KEY", "")
+    )
 
     # ── 模型 ──
     MODEL_NAME: str = field(
@@ -65,6 +69,8 @@ class Config:
 config = Config()
 
 VLLM_BASE_URL = config.VLLM_BASE_URL
-MODEL_NAME = config.MODEL_NAME
 VLLM_TOKENIZE_URL = config.VLLM_TOKENIZE_URL
 VLLM_DETOKENIZE_URL = config.VLLM_DETOKENIZE_URL
+
+MODEL_NAME = config.MODEL_NAME
+API_KEY = config.API_KEY

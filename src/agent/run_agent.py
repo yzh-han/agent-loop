@@ -19,14 +19,12 @@ run_agent.py —— 启动 Agent
       --enable-auto-tool-choice
 """
 
-import sys
-from openai import OpenAI
+
 from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
 
 # 从同 package 导入 agent loop 和 tool 定义
 from agent.agent_loop import run_agent
-from agent.react_loop import run_react
-from agent.config import VLLM_BASE_URL, MODEL_NAME
+# from agent.react_loop import run_react
 from agent.tool_registry import TOOLS
 import agent.tools  # noqa: F401  # 导入 tools 模块以注册工具函数
 

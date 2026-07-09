@@ -2,6 +2,16 @@
 
 > 本地环境：vLLM (`http://0.0.0.0:8000`) 托管 `google/gemma-4-E4B-it`
 
+## how to run
+
+``` bash
+# 1. 创建.env 文件 or 重命名 .env_example -> .env， 然后# 1. 修改 .env 文件中的配置 
+mv .env_example .env
+
+# 2. 安装uv: https://docs.astral.sh/uv/#highlights, 然后
+uv run python -m agent.run_agent
+```
+
 ---
 
 ## 目录

@@ -106,7 +106,7 @@ from openai.types.chat import (
   ChatCompletionUserMessageParam,
 )
 
-from agent.config import VLLM_BASE_URL, MODEL_NAME
+from agent.config import VLLM_BASE_URL, MODEL_NAME, API_KEY
 from agent.utils import show_token_mapping
 
 _VERBOSE = True  # 是否打印每轮的工具调用详情
@@ -120,7 +120,7 @@ def _log(msg, border=False):
 
 
 
-_CLIENT: OpenAI = OpenAI(base_url=VLLM_BASE_URL, api_key="not-needed")  # 指向本地 vLLM
+_CLIENT: OpenAI = OpenAI(base_url=VLLM_BASE_URL, api_key=API_KEY)  # 指向本地 vLLM
 _MODEL: str = MODEL_NAME  # vLLM 模型名
 
 def run_agent(
